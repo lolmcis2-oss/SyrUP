@@ -9,29 +9,17 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   .ts-page { font-family: 'Nunito', sans-serif; background: #FFF8EF; overflow-x: hidden; min-height: 100vh;}
 
-  /* LOGO BACKGROUND REMOVAL TRICK */
-  .logo-img {
-    height: 35px; /* Grösse des Logos anpassen */
-    width: auto;
-    mix-blend-mode: screen; /* Macht Schwarz transparent, Farben bleiben */
-    display: block;
-  }
-  .nav-logo-container {
-    background: #000; /* Schwarzer Hintergrund ist nötig für den Blend-Effekt auf der weissen Nav */
-    padding: 6px 12px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  }
-
-  /* NAV */
+  /* NAV & LOGO */
   .nav {
     display: flex; justify-content: space-between; align-items: center;
     padding: 12px 20px; background: #fff; border-bottom: 2px solid #FFF0A0;
     position: sticky; top: 0; z-index: 100;
   }
+  
+  /* NEUES TEXT-LOGO (anstelle des Bildes) */
+  .nav-logo { font-size: 24px; font-weight: 900; color: #FF6B35; cursor: pointer; letter-spacing: -0.5px;}
+  .nav-logo span { color: #00C897; }
+  
   .nav-actions { display: flex; gap: 10px; }
 
   /* HERO */
@@ -77,14 +65,8 @@
 
   /* SECTION STYLES */
   .section { padding: 40px 24px 32px; max-width: 800px; margin: 0 auto;}
-  .section-label {
-    text-align: center; font-size: 11px; font-weight: 800; letter-spacing: 2px;
-    text-transform: uppercase; color: #FF6B35; margin-bottom: 6px;
-  }
-  .section-title {
-    text-align: center; font-size: 26px; font-weight: 900; color: #1A1A2E;
-    margin-bottom: 8px; letter-spacing: -0.5px;
-  }
+  .section-label { text-align: center; font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: #FF6B35; margin-bottom: 6px; }
+  .section-title { text-align: center; font-size: 26px; font-weight: 900; color: #1A1A2E; margin-bottom: 8px; letter-spacing: -0.5px; }
   .section-sub { text-align: center; font-size: 13px; color: #666; margin-bottom: 28px; line-height: 1.6; }
 
   /* SORTEN grid */
@@ -127,36 +109,56 @@
   .size-info p { font-size: 12px; color: #666;}
   .size-price { font-size: 18px; font-weight: 900; color: #FF4D6D; }
 
-  /* WARENKORB ROW */
+  /* WARENKORB ROW & BUTTONS */
   .cart-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #eee; }
   .cart-row:last-child { border-bottom: none; }
   .cart-item-title { font-weight: 900; color: #1A1A2E; font-size: 16px; margin-bottom: 4px;}
   .cart-item-price { color: #FF4D6D; font-weight: 800; }
   
+  .qty-btn {
+    background: #FFF0A0; border: none; border-radius: 8px; width: 30px; height: 30px;
+    font-weight: 900; color: #FF6B35; cursor: pointer; font-family: 'Nunito', sans-serif;
+    display: flex; align-items: center; justify-content: center; font-size: 18px;
+    transition: 0.1s;
+  }
+  .qty-btn:hover { background: #FFE066; transform: scale(1.05); }
+  .qty-display { font-weight: 900; font-size: 16px; width: 24px; text-align: center; color: #1A1A2E;}
+
   /* FORM INPUTS */
   .form-input { width: 100%; padding: 14px; border: 2px solid #FFF0A0; border-radius: 12px; font-family: 'Nunito', sans-serif; font-size: 15px; outline: none; margin-bottom: 14px; transition: 0.2s; background: #FFF8EF; }
   .form-input:focus { border-color: #FF6B35; background: #fff; }
 
+  /* CHECKOUT ZWISCHENSUMME BOX */
+  .checkout-summary-box {
+    background: #FFF8EF; border: 2px solid #FFE066; border-radius: 16px; 
+    padding: 16px; margin-bottom: 24px;
+  }
+  .checkout-item-list {
+    margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #FFE066;
+  }
+  .checkout-item-row {
+    display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 6px;
+  }
+  .checkout-total-row {
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
   /* FOOTER */
   .footer-inner { background: #1A1A2E; padding: 24px; text-align: center; margin-top: 40px; display: flex; flex-direction: column; align-items: center;}
-  .footer-logo-container {
-    background: #000;
-    padding: 6px 12px;
-    border-radius: 8px;
-    display: inline-flex;
-    margin-bottom: 12px;
-  }
+  
+  /* NEUES TEXT-LOGO (anstelle des Bildes im Footer) */
+  .footer-logo { font-size: 24px; font-weight: 900; color: #FF6B35; margin-bottom: 12px; cursor: pointer; letter-spacing: -0.5px;}
+  .footer-logo span { color: #00C897; }
+  
   .footer-copy { font-size: 10px; color: rgba(255,255,255,0.35); }
 </style>
 </head>
-<body>
+<body onload="renderCart()">
 
 <div class="ts-page">
 
   <nav class="nav">
-    <div class="nav-logo-container" onclick="showSlide('slide-main')">
-      <img src="image_d05000.png" alt="SyrUP Logo" class="logo-img">
-    </div>
+    <div class="nav-logo" onclick="showSlide('slide-main')">Syr<span>UP</span></div>
     
     <div class="nav-actions">
       <button class="cta-btn btn-outline" style="padding: 8px 16px; font-size: 12px; box-shadow: none;" onclick="showSlide('slide-shop')">Shop</button>
@@ -266,7 +268,7 @@
         </div>
         <div style="display: flex; align-items: center; gap: 15px;">
             <div class="size-price">CHF 14.90</div>
-            <button class="cta-btn" style="padding: 8px 16px; font-size: 12px;" onclick="showSlide('slide-cart')">Hinzufügen</button>
+            <button class="cta-btn" style="padding: 8px 16px; font-size: 12px;" onclick="addToCart('bottle1L')">Hinzufügen</button>
         </div>
       </div>
       
@@ -277,7 +279,7 @@
         </div>
         <div style="display: flex; align-items: center; gap: 15px;">
             <div class="size-price">CHF 4.90</div>
-            <button class="cta-btn" style="padding: 8px 16px; font-size: 12px;" onclick="showSlide('slide-cart')">Hinzufügen</button>
+            <button class="cta-btn" style="padding: 8px 16px; font-size: 12px;" onclick="addToCart('bottle80ml')">Hinzufügen</button>
         </div>
       </div>
     </div>
@@ -289,28 +291,15 @@
     <div class="product-detail-card">
       <h2 style="margin-bottom: 20px;">Dein Warenkorb 🛒</h2>
       
-      <div class="cart-row">
-        <div>
-            <div class="cart-item-title">SyrUP Maracuja - 1 Liter</div>
-            <div style="font-size: 12px; color: #666;">Menge: 1</div>
+      <div id="cart-items-container">
         </div>
-        <div class="cart-item-price">CHF 14.90</div>
-      </div>
-
-      <div class="cart-row">
-        <div>
-            <div class="cart-item-title">SyrUP Maracuja - 80 ml</div>
-            <div style="font-size: 12px; color: #666;">Menge: 2</div>
-        </div>
-        <div class="cart-item-price">CHF 9.80</div>
-      </div>
 
       <div class="cart-row" style="border-top: 2px solid #FFE066; margin-top: 10px; padding-top: 20px;">
         <div style="font-weight: 900; font-size: 18px; color: #1A1A2E;">Total</div>
-        <div style="font-weight: 900; font-size: 22px; color: #FF4D6D;">CHF 24.70</div>
+        <div id="cart-total-display" style="font-weight: 900; font-size: 22px; color: #FF4D6D;">CHF 0.00</div>
       </div>
 
-      <button class="cta-btn" style="width: 100%; margin-top: 24px;" onclick="showSlide('slide-checkout')">Zur Kasse gehen</button>
+      <button id="checkout-btn" class="cta-btn" style="width: 100%; margin-top: 24px; display: none;" onclick="showSlide('slide-checkout')">Zur Kasse gehen</button>
     </div>
   </div>
 
@@ -319,6 +308,15 @@
 
     <div class="product-detail-card">
       <h2 style="margin-bottom: 20px;">Checkout 💳</h2>
+
+      <div class="checkout-summary-box">
+        <div id="checkout-items-list" class="checkout-item-list"></div>
+        
+        <div class="checkout-total-row">
+            <span style="font-weight: 800; color: #1A1A2E; font-size: 16px;">Total:</span>
+            <span id="checkout-subtotal-display" style="font-weight: 900; font-size: 20px; color: #FF4D6D;">CHF 0.00</span>
+        </div>
+      </div>
       
       <h3 style="font-size: 14px; color: #FF6B35; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">Lieferadresse</h3>
       <input type="text" class="form-input" placeholder="Vorname Nachname">
@@ -335,32 +333,110 @@
         <span style="cursor: pointer; opacity: 0.6; transition: 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">🏦</span>
       </div>
 
-      <button class="cta-btn" style="width: 100%;" onclick="alert('Bestellung bei SyrUP erfolgreich abgeschlossen! (Demo)')">Jetzt kaufen (CHF 24.70)</button>
+      <button id="final-buy-btn" class="cta-btn" style="width: 100%;" onclick="alert('Bestellung bei SyrUP erfolgreich abgeschlossen! (Demo)')">Jetzt kaufen</button>
     </div>
   </div>
 
   <footer class="footer-inner">
-    <div class="footer-logo-container" onclick="showSlide('slide-main')" style="cursor: pointer;">
-      <img src="image_d05000.png" alt="SyrUP Logo" class="logo-img">
-    </div>
+    <div class="footer-logo" onclick="showSlide('slide-main')">Syr<span>UP</span></div>
     <div class="footer-copy">© 2026 Robin & Nevio - Gegründet in St. Gallen (SG)</div>
   </footer>
 
 </div>
 
 <script>
+  const products = {
+    'bottle1L': { title: 'SyrUP Maracuja - 1 Liter', price: 14.90 },
+    'bottle80ml': { title: 'SyrUP Maracuja - 80 ml', price: 4.90 }
+  };
+
+  let cart = {
+    'bottle1L': 0,
+    'bottle80ml': 0
+  };
+
   function showSlide(slideId) {
-    // Verstecke alle Container
     const slides = document.querySelectorAll('.slide-container');
-    slides.forEach(slide => {
-      slide.style.display = 'none';
-    });
-    
-    // Zeige nur den ausgewählten Container
+    slides.forEach(slide => slide.style.display = 'none');
     document.getElementById(slideId).style.display = 'block';
-    
-    // Scrolle flüssig nach oben
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function addToCart(productId) {
+    cart[productId]++;
+    renderCart();
+    showSlide('slide-cart');
+  }
+
+  function changeQuantity(productId, delta) {
+    cart[productId] += delta;
+    if (cart[productId] < 0) {
+      cart[productId] = 0;
+    }
+    renderCart();
+  }
+
+  function renderCart() {
+    const container = document.getElementById('cart-items-container');
+    const totalDisplay = document.getElementById('cart-total-display');
+    const checkoutBtn = document.getElementById('checkout-btn');
+    const finalBuyBtn = document.getElementById('final-buy-btn');
+    
+    // Check-Out Elemente
+    const checkoutItemsList = document.getElementById('checkout-items-list');
+    const checkoutSubtotalDisplay = document.getElementById('checkout-subtotal-display');
+    
+    // Container leeren
+    container.innerHTML = ''; 
+    checkoutItemsList.innerHTML = '';
+    
+    let total = 0;
+    let hasItems = false;
+
+    for (const [id, qty] of Object.entries(cart)) {
+      if (qty > 0) {
+        hasItems = true;
+        const itemTotal = qty * products[id].price;
+        total += itemTotal;
+        
+        // 1. Artikel für den Warenkorb-Slide rendern
+        container.innerHTML += `
+          <div class="cart-row">
+            <div>
+                <div class="cart-item-title">${products[id].title}</div>
+                <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px;">
+                    <button class="qty-btn" onclick="changeQuantity('${id}', -1)">-</button>
+                    <div class="qty-display">${qty}</div>
+                    <button class="qty-btn" onclick="changeQuantity('${id}', 1)">+</button>
+                </div>
+            </div>
+            <div class="cart-item-price">CHF ${itemTotal.toFixed(2)}</div>
+          </div>
+        `;
+
+        // 2. Artikel für die Checkout-Übersicht rendern
+        checkoutItemsList.innerHTML += `
+          <div class="checkout-item-row">
+            <span style="color: #1A1A2E; font-weight: 700;">${qty}x ${products[id].title}</span>
+            <span style="color: #666;">CHF ${itemTotal.toFixed(2)}</span>
+          </div>
+        `;
+      }
+    }
+
+    if (!hasItems) {
+      container.innerHTML = '<p style="color: #666; font-size: 14px; margin-bottom: 20px;">Dein Warenkorb ist noch leer.</p>';
+      checkoutItemsList.innerHTML = '<div style="color: #666; font-size: 14px;">Keine Artikel ausgewählt.</div>';
+      checkoutBtn.style.display = 'none';
+    } else {
+      checkoutBtn.style.display = 'block';
+    }
+
+    // Totals aktualisieren
+    const formattedTotal = `CHF ${total.toFixed(2)}`;
+    totalDisplay.innerText = formattedTotal;
+    checkoutSubtotalDisplay.innerText = formattedTotal;
+    finalBuyBtn.innerText = `Jetzt kaufen (${formattedTotal})`;
   }
 </script>
 
