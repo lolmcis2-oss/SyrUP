@@ -1,155 +1,31 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SyrUP - Premium Drink Mixers</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap');
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  .ts-page { font-family: 'Nunito', sans-serif; background: #FFF8EF; overflow: hidden; }
+  body { background: #FFF8EF; color: #1A1A2E; font-family: 'Nunito', sans-serif; }
+  .ts-page { min-height: 100vh; display: flex; flex-direction: column; }
 
-  /* HERO */
-  .hero {
-    background: linear-gradient(135deg, #FF6B35 0%, #FFB800 40%, #FF4D6D 80%, #C44DFF 100%);
-    position: relative; overflow: hidden; padding: 0;
-    min-height: 520px; display: flex; align-items: stretch;
+  /* LOGO BACKGROUND REMOVAL TRICK */
+  .logo-img {
+    height: 50px;
+    width: auto;
+    /* Entfernt schwarz, lässt Farben leuchten */
+    mix-blend-mode: screen; 
+    display: block;
   }
-  .hero-wave-top {
-    position: absolute; top: 0; left: 0; right: 0; height: 8px;
-    background: repeating-linear-gradient(90deg, #FFE066 0 40px, #FF6B9D 40px 80px, #00D4AA 80px 120px, #FFB800 120px 160px);
+  .nav-logo-container {
+    background: #000; /* Schwarzer Hintergrund im Container hilft dem Blend-Effekt */
+    padding: 5px 15px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
   }
-  .hero-wave-bottom {
-    position: absolute; bottom: 0; left: 0; right: 0; overflow: hidden; line-height: 0;
-  }
-  .hero-wave-bottom svg { display: block; width: 100%; height: 60px; }
-  .hero-inner { display: flex; align-items: center; padding: 40px 32px 80px 32px; gap: 0; width: 100%; position: relative; z-index: 2; }
-  .hero-text { flex: 1; }
-  .hero-badge {
-    display: inline-block; background: #FFE066; color: #C44DFF; font-size: 11px;
-    font-weight: 800; border-radius: 20px; padding: 4px 14px; letter-spacing: 1.5px;
-    text-transform: uppercase; margin-bottom: 14px;
-  }
-  .hero-h1 {
-    color: #fff; font-size: 36px; font-weight: 900; line-height: 1.1;
-    text-shadow: 0 3px 0 rgba(0,0,0,0.15); margin-bottom: 16px;
-    letter-spacing: -0.5px;
-  }
-  .hero-h1 span { color: #FFE066; }
-  .hero-sub {
-    color: rgba(255,255,255,0.92); font-size: 14px; font-weight: 700;
-    line-height: 1.6; margin-bottom: 28px; max-width: 340px;
-  }
-  .cta-btn {
-    display: inline-block; background: #FF4D6D; color: #FFE066; font-family: 'Nunito', sans-serif;
-    font-size: 16px; font-weight: 900; border-radius: 50px; padding: 14px 32px;
-    border: none; cursor: pointer; letter-spacing: 0.5px; text-transform: uppercase;
-    box-shadow: 0 4px 0 #C4003B; transition: transform 0.1s, box-shadow 0.1s;
-  }
-  .cta-btn:hover { transform: translateY(2px); box-shadow: 0 2px 0 #C4003B; }
-
-  /* BOTTLE + GLASS illustration */
-  .hero-visual { width: 240px; flex-shrink: 0; display: flex; justify-content: center; align-items: flex-end; padding-bottom: 10px; }
-
-  /* GEOMETRIC DOTS PATTERN */
-  .hero-dots {
-    position: absolute; top: 60px; right: 20px; opacity: 0.18; z-index: 1;
-  }
-
-  /* WAVE SHAPE between hero and content */
-  .wave-divider { background: #FF6B35; }
-  .wave-divider svg { display: block; }
-
-  /* SECTION STYLES */
-  .section { padding: 40px 24px 32px; }
-  .section-label {
-    text-align: center; font-size: 11px; font-weight: 800; letter-spacing: 2px;
-    text-transform: uppercase; color: #FF6B35; margin-bottom: 6px;
-  }
-  .section-title {
-    text-align: center; font-size: 26px; font-weight: 900; color: #1A1A2E;
-    margin-bottom: 8px; letter-spacing: -0.5px;
-  }
-  .section-sub {
-    text-align: center; font-size: 13px; color: #666; margin-bottom: 28px; line-height: 1.6;
-  }
-
-  /* SORTEN grid */
-  .sorten-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-  .sorten-card {
-    border-radius: 20px; padding: 18px 12px 14px; text-align: center;
-    position: relative; overflow: hidden;
-  }
-  .sorten-card .s-icon { font-size: 36px; margin-bottom: 8px; display: block; }
-  .sorten-card .s-name { font-size: 13px; font-weight: 900; margin-bottom: 4px; }
-  .sorten-card .s-note { font-size: 10px; font-weight: 700; opacity: 0.75; }
-  .sorten-card .s-zero {
-    position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,0.5);
-    border-radius: 10px; font-size: 9px; font-weight: 800; padding: 2px 6px;
-    color: rgba(0,0,0,0.6);
-  }
-  .sc1 { background: #FFF0A0; } .sc1 .s-name { color: #A06000; }
-  .sc2 { background: #FFD4E0; } .sc2 .s-name { color: #A00050; }
-  .sc3 { background: #C8F5E0; } .sc3 .s-name { color: #006640; }
-  .sc4 { background: #D4E8FF; } .sc4 .s-name { color: #003880; }
-  .sc5 { background: #FFDFBF; } .sc5 .s-name { color: #803000; }
-  .sc6 { background: #E8D0FF; } .sc6 .s-name { color: #5B00A0; }
-
-  /* WIE ES FUNKTIONIERT */
-  .wie-bg { background: linear-gradient(160deg, #FFB800 0%, #FF6B35 100%); }
-  .wie-steps { display: flex; flex-direction: column; gap: 14px; }
-  .wie-step {
-    background: rgba(255,255,255,0.22); border-radius: 16px;
-    padding: 14px 16px; display: flex; align-items: center; gap: 14px;
-  }
-  .wie-num {
-    width: 36px; height: 36px; border-radius: 50%; background: #fff;
-    color: #FF6B35; font-size: 18px; font-weight: 900; display: flex;
-    align-items: center; justify-content: center; flex-shrink: 0;
-  }
-  .wie-step-text .wie-t { font-size: 14px; font-weight: 900; color: #fff; }
-  .wie-step-text .wie-s { font-size: 11px; color: rgba(255,255,255,0.85); margin-top: 2px; }
-
-  /* RECIPES */
-  .recipes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .recipe-card {
-    border-radius: 18px; overflow: hidden; position: relative; min-height: 140px;
-    display: flex; flex-direction: column; justify-content: flex-end; padding: 14px;
-  }
-  .recipe-card .r-tag {
-    position: absolute; top: 10px; left: 10px; border-radius: 10px;
-    font-size: 9px; font-weight: 800; padding: 3px 8px; text-transform: uppercase;
-  }
-  .recipe-card .r-name { font-size: 13px; font-weight: 900; color: #fff; line-height: 1.3; text-shadow: 0 1px 4px rgba(0,0,0,0.3); }
-  .recipe-card .r-kcal { font-size: 10px; color: rgba(255,255,255,0.85); font-weight: 700; }
-  .rc1 { background: linear-gradient(160deg, #FF9F0A, #FF4D6D); }
-  .rc2 { background: linear-gradient(160deg, #00C897, #0088FF); }
-  .rc3 { background: linear-gradient(160deg, #C44DFF, #FF4D6D); }
-  .rc4 { background: linear-gradient(160deg, #FFE066, #FF9F0A); }
-
-  /* ÜBER UNS */
-  .uber-card {
-    background: #1A1A2E; border-radius: 24px; padding: 28px 20px;
-    display: flex; align-items: center; gap: 16px;
-  }
-  .uber-avatar {
-    width: 80px; height: 80px; border-radius: 50%; flex-shrink: 0; overflow: hidden;
-    border: 3px solid #FFE066;
-  }
-  .uber-text .u-name { font-size: 16px; font-weight: 900; color: #FFE066; margin-bottom: 4px; }
-  .uber-text .u-desc { font-size: 12px; color: rgba(255,255,255,0.75); line-height: 1.6; }
-  .uber-text .u-tag {
-    display: inline-block; margin-top: 8px; background: #FF4D6D;
-    color: #fff; font-size: 9px; font-weight: 800; border-radius: 10px;
-    padding: 3px 10px; text-transform: uppercase; letter-spacing: 1px;
-  }
-
-  /* FOOTER WAVE */
-  .footer-wave { background: #1A1A2E; }
-  .footer-inner {
-    background: #1A1A2E; padding: 24px; text-align: center;
-  }
-  .footer-logo { font-size: 22px; font-weight: 900; color: #FFE066; margin-bottom: 6px; }
-  .footer-logo span { color: #FF4D6D; }
-  .footer-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 12px; }
-  .footer-links a { color: rgba(255,255,255,0.6); font-size: 11px; font-weight: 700; text-decoration: none; }
-  .footer-copy { font-size: 10px; color: rgba(255,255,255,0.35); }
-  .footer-badges { display: flex; justify-content: center; gap: 8px; margin-bottom: 14px; }
-  .f-badge { background: rgba(255,255,255,0.08); border-radius: 8px; padding: 5px 10px; font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.7); }
 
   /* NAV */
   .nav {
@@ -157,305 +33,202 @@
     padding: 12px 20px; background: #fff; border-bottom: 2px solid #FFF0A0;
     position: sticky; top: 0; z-index: 100;
   }
-  .nav-logo { font-size: 19px; font-weight: 900; color: #FF6B35; }
-  .nav-logo span { color: #00C897; }
-  .nav-links { display: flex; gap: 12px; }
-  .nav-links a { font-size: 11px; font-weight: 800; color: #1A1A2E; text-decoration: none; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.5px; }
   .nav-btn {
-    background: #FF4D6D; color: #fff; font-family: 'Nunito', sans-serif;
-    font-size: 10px; font-weight: 900; border: none; border-radius: 20px;
-    padding: 7px 14px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px;
+    background: #FF4D6D; color: #fff; font-size: 14px; font-weight: 900;
+    border: none; border-radius: 20px; padding: 10px 20px; cursor: pointer;
   }
 
-  /* TRUST BAR */
-  .trust-bar {
-    background: #FFE066; padding: 10px 20px;
-    display: flex; justify-content: center; gap: 28px; flex-wrap: wrap;
-  }
-  .trust-item { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 800; color: #7A5000; }
+  /* SLIDES */
+  .slide { display: none; padding: 40px 24px; max-width: 900px; margin: 0 auto; width: 100%; flex: 1; }
+  .active-slide { display: block; }
 
-  /* ZIGZAG PATTERN */
-  .zig { height: 20px; background: #FFF8EF; position: relative; }
-  .zig::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    background: repeating-linear-gradient(135deg, #FF6B35 0 10px, transparent 10px 20px),
-                repeating-linear-gradient(-135deg, #FF6B35 0 10px, transparent 10px 20px);
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #FF6B35 0%, #FFB800 40%, #FF4D6D 80%, #C44DFF 100%);
+    position: relative; overflow: hidden; padding: 60px 32px;
+    min-height: 400px; display: flex; align-items: center; border-radius: 0 0 40px 40px;
+    margin-bottom: 40px; color: #fff;
   }
+  .hero-h1 { font-size: 42px; font-weight: 900; line-height: 1.1; margin-bottom: 16px; }
+  .hero-h1 span { color: #FFE066; }
+
+  /* CARDS & FORMS */
+  .card {
+    background: #fff; border-radius: 24px; padding: 24px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 24px;
+  }
+  .section-title { font-size: 28px; font-weight: 900; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;}
+  
+  .cta-btn {
+    display: block; width: 100%; background: #FF4D6D; color: #FFE066; 
+    font-size: 18px; font-weight: 900; border-radius: 50px; padding: 16px;
+    border: none; cursor: pointer; text-transform: uppercase; text-align: center;
+    box-shadow: 0 4px 0 #C4003B; transition: 0.1s; text-decoration: none;
+  }
+  .cta-btn:hover { transform: translateY(2px); box-shadow: 0 2px 0 #C4003B; }
+
+  /* WARENKORB ITEMS */
+  .cart-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 15px 0; border-bottom: 1px solid #eee;
+  }
+  .cart-item:last-child { border-bottom: none; }
+  .item-meta h4 { font-weight: 900; font-size: 16px; }
+  .item-qty { background: #eee; padding: 5px 12px; border-radius: 10px; font-weight: 800; }
+
+  /* FORM STYLES */
+  .form-group { margin-bottom: 15px; }
+  .form-group label { display: block; font-size: 13px; font-weight: 800; margin-bottom: 5px; color: #FF6B35; }
+  .form-group input {
+    width: 100%; padding: 12px; border: 2px solid #FFF0A0; border-radius: 12px;
+    font-family: 'Nunito', sans-serif; font-size: 15px; outline: none;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+
+  .payment-icons { display: flex; gap: 10px; margin-top: 10px; font-size: 24px; }
+
+  .back-link { cursor: pointer; color: #FF6B35; font-weight: 800; display: inline-block; margin-bottom: 15px; }
+
+  footer { background: #1A1A2E; color: #fff; padding: 40px 24px; text-align: center; margin-top: auto; }
 </style>
+</head>
+<body>
 
 <div class="ts-page">
 
   <nav class="nav">
-    <div class="nav-logo">Tropical<span>Sip</span> 🍹</div>
-    <div class="nav-links">
-      <a href="#">Sorten</a>
-      <a href="#">Recipes</a>
-      <a href="#">Über uns</a>
+    <div class="nav-logo-container" onclick="showSlide('slide-main')">
+       <img src="https://files.oaiusercontent.com/file-K77G0L7yR36BqU9M7yX28p6m?se=2024-10-24T12%3A05%3A22Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D30743f5f-923f-4277-8321-3958742d4a66.webp&sig=6Y7Y7uI4S8iL7Yv9oE4H5vO5%2By0v0U4W4O0B7Q9i1A0%3D" alt="SyrUP Logo" class="logo-img">
     </div>
-    <button class="nav-btn">Bestellen</button>
+    <button class="nav-btn" onclick="showSlide('slide-cart')">🛒 Warenkorb</button>
   </nav>
 
-  <div class="hero">
-    <div class="hero-wave-top"></div>
-
-    <svg class="hero-dots" width="180" height="180" viewBox="0 0 180 180">
-      <defs>
-        <pattern id="dots" x="0" y="0" width="18" height="18" patternUnits="userSpaceOnUse">
-          <circle cx="9" cy="9" r="2.5" fill="#fff"/>
-        </pattern>
-      </defs>
-      <rect width="180" height="180" fill="url(#dots)"/>
-    </svg>
-
-    <svg style="position:absolute;top:30px;left:20px;z-index:1;opacity:0.6" width="120" height="80" viewBox="0 0 120 80">
-      <text x="10" y="20" font-size="16" fill="#FFE066">✦</text>
-      <text x="55" y="10" font-size="10" fill="#fff">✦</text>
-      <text x="95" y="30" font-size="14" fill="#FFE066">✦</text>
-      <text x="30" y="55" font-size="8" fill="#fff">✦</text>
-      <text x="80" y="60" font-size="12" fill="#FFE066">✦</text>
-    </svg>
-
-    <div class="hero-inner">
-      <div class="hero-text">
-        <div class="hero-badge">🌴 Zero Zucker · 100% Sommer</div>
-        <div class="hero-h1">ERFRISCHUNG<br>OHNE REUE.<br><span>DEIN SOMMER.<br>DEIN MIX.</span></div>
-        <div class="hero-sub">Entdecke unsere handgemachten Zero-Calorie Sirups aus der Schweiz. Null Zucker, 100% Spaß.</div>
-        <button class="cta-btn">🛒 Jetzt bestellen</button>
-      </div>
-
-      <div class="hero-visual">
-        <svg width="210" height="380" viewBox="0 0 210 380">
-          <g transform="translate(105, 0)">
-            <path d="M18,80 L8,310 Q8,330 28,330 L82,330 Q102,330 102,310 L92,80 Z" fill="rgba(255,255,255,0.25)" stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
-            <path d="M19,130 L9,305 Q9,325 29,325 L81,325 Q101,325 101,305 L91,130 Z" fill="#FF6B35" opacity="0.85"/>
-            <path d="M20,140 L10,305 Q10,322 29,322 L81,322 Q100,322 100,305 L90,140 Z" fill="#FF4D6D" opacity="0.5"/>
-            <rect x="25" y="155" width="22" height="22" rx="4" fill="rgba(255,255,255,0.7)" transform="rotate(-12 36 166)"/>
-            <rect x="55" y="165" width="20" height="20" rx="3" fill="rgba(255,255,255,0.6)" transform="rotate(8 65 175)"/>
-            <rect x="35" y="185" width="18" height="18" rx="3" fill="rgba(255,255,255,0.55)" transform="rotate(-5 44 194)"/>
-            <ellipse cx="38" cy="220" rx="16" ry="10" fill="#FFE066" opacity="0.9" transform="rotate(-15 38 220)"/>
-            <ellipse cx="38" cy="220" rx="10" ry="6" fill="#FF9F0A" opacity="0.8" transform="rotate(-15 38 220)"/>
-            <line x1="38" y1="210" x2="38" y2="230" stroke="#FF9F0A" stroke-width="1" transform="rotate(-15 38 220)"/>
-            <line x1="28" y1="220" x2="48" y2="220" stroke="#FF9F0A" stroke-width="1" transform="rotate(-15 38 220)"/>
-            <ellipse cx="90" cy="82" rx="14" ry="8" fill="#7ED321" opacity="0.9" transform="rotate(20 90 82)"/>
-            <ellipse cx="90" cy="82" rx="8" ry="4.5" fill="#A8E440" opacity="0.85" transform="rotate(20 90 82)"/>
-            <path d="M84,78 L96,86" stroke="#6BB000" stroke-width="0.8" transform="rotate(20 90 82)"/>
-            <rect x="72" y="40" width="6" height="200" rx="3" fill="#FF4D6D" transform="rotate(5 75 140)"/>
-            <rect x="73" y="41" width="4" height="195" rx="2" fill="#FF6B9D" opacity="0.5" transform="rotate(5 75 140)"/>
-            <path d="M22,100 L24,280" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round"/>
-            <path d="M18,80 Q55,72 92,80" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"/>
-            <circle cx="40" cy="265" r="3" fill="rgba(255,255,255,0.4)"/>
-            <circle cx="60" cy="280" r="2" fill="rgba(255,255,255,0.35)"/>
-            <circle cx="50" cy="255" r="2.5" fill="rgba(255,255,255,0.3)"/>
-          </g>
-
-          <g transform="translate(0, 20)">
-            <path d="M28,90 L18,280 Q18,300 35,300 L68,300 Q85,300 85,280 L75,90 Z" fill="#FF9F0A"/>
-            <rect x="38" y="50" width="27" height="45" rx="6" fill="#FF9F0A"/>
-            <rect x="36" y="38" width="31" height="20" rx="6" fill="#FFE066"/>
-            <rect x="41" y="34" width="21" height="10" rx="4" fill="#FFE066"/>
-            <rect x="20" y="110" width="63" height="150" rx="8" fill="#fff" opacity="0.95"/>
-            <rect x="20" y="110" width="63" height="30" rx="8" fill="#FF4D6D"/>
-            <text x="51" y="130" text-anchor="middle" font-family="Nunito, sans-serif" font-size="7" font-weight="900" fill="#fff">TROPICAL SIP</text>
-            <text x="51" y="165" text-anchor="middle" font-size="22">🥭</text>
-            <text x="33" y="180" text-anchor="middle" font-size="14">🌟</text>
-            <text x="69" y="175" text-anchor="middle" font-size="14">🏝️</text>
-            <text x="51" y="195" text-anchor="middle" font-size="12">🍑</text>
-            <text x="51" y="218" text-anchor="middle" font-family="Nunito, sans-serif" font-size="6.5" font-weight="900" fill="#A06000">MANGO</text>
-            <text x="51" y="228" text-anchor="middle" font-family="Nunito, sans-serif" font-size="6" font-weight="800" fill="#A06000">PASSIONFRUCHT</text>
-            <text x="51" y="238" text-anchor="middle" font-family="Nunito, sans-serif" font-size="8" font-weight="900" fill="#FF4D6D">KICKS</text>
-            <rect x="27" y="244" width="49" height="12" rx="6" fill="#FFE066"/>
-            <text x="51" y="253" text-anchor="middle" font-family="Nunito, sans-serif" font-size="6" font-weight="900" fill="#7A5000">0 KALORIEN · 0 ZUCKER</text>
-            <text x="24" y="95" font-size="10" fill="#FFE066">✦</text>
-            <text x="80" y="88" font-size="8" fill="#FFE066">✦</text>
-            <path d="M32,100 L30,270" stroke="rgba(255,255,255,0.35)" stroke-width="2.5" stroke-linecap="round"/>
-          </g>
-        </svg>
-      </div>
-    </div>
-
-    <div class="hero-wave-bottom">
-      <svg viewBox="0 0 680 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,0 Q170,60 340,30 Q510,0 680,50 L680,60 L0,60 Z" fill="#FFF8EF"/>
-      </svg>
-    </div>
-  </div>
-
-  <div class="trust-bar">
-    <div class="trust-item">🇨🇭 Hergestellt in der Schweiz</div>
-    <div class="trust-item">✦ 0 Kalorien</div>
-    <div class="trust-item">🌿 Ohne Zucker</div>
-    <div class="trust-item">⚡ Natürliche Aromen</div>
-  </div>
-
-  <div class="section">
-    <div class="section-label">Was wir bieten</div>
-    <div class="section-title">Unsere Sorten 🍹</div>
-    <div class="section-sub">Sechs handgemachte Geschmacksrichtungen — alle ohne Zucker und Kalorien.</div>
-    <div class="sorten-grid">
-      <div class="sorten-card sc1">
-        <span class="s-zero">0 kcal</span>
-        <span class="s-icon">🥭</span>
-        <div class="s-name">Mango-Passion</div>
-        <div class="s-note">Tropisch & süss</div>
-      </div>
-      <div class="sorten-card sc2">
-        <span class="s-zero">0 kcal</span>
-        <span class="s-icon">🍓</span>
-        <div class="s-name">Erdbeere-Rose</div>
-        <div class="s-note">Romantisch & frisch</div>
-      </div>
-      <div class="sorten-card sc3">
-        <span class="s-zero">0 kcal</span>
-        <span class="s-icon">🍃</span>
-        <div class="s-name">Mojito-Minze</div>
-        <div class="s-note">Kühl & belebend</div>
-      </div>
-      <div class="sorten-card sc4">
-        <span class="s-zero">0 kcal</span>
-        <span class="s-icon">🫐</span>
-        <div class="s-name">Blaubeer-Lavendel</div>
-        <div class="s-note">Würzig & elegant</div>
-      </div>
-      <div class="sorten-card sc5">
-        <span class="s-zero">0 kcal</span>
-        <span class="s-icon">🍊</span>
-        <div class="s-name">Orangen-Chili</div>
-        <div class="s-note">Mutig & spritzig</div>
-      </div>
-      <div class="sorten-card sc6">
-        <span class="s-zero">0 kcal</span>
-        <span class="s-icon">🍇</span>
-        <div class="s-name">Traube-Lychee</div>
-        <div class="s-note">Exotisch & fein</div>
-      </div>
-    </div>
-  </div>
-
-  <div style="height:16px;overflow:hidden">
-    <svg width="100%" height="16" viewBox="0 0 400 16">
-      <polyline points="0,16 20,0 40,16 60,0 80,16 100,0 120,16 140,0 160,16 180,0 200,16 220,0 240,16 260,0 280,16 300,0 320,16 340,0 360,16 380,0 400,16" fill="none" stroke="#FFE066" stroke-width="3"/>
-    </svg>
-  </div>
-
-  <div class="section wie-bg" style="border-radius:0">
-    <div class="section-label" style="color:rgba(255,255,255,0.8)">So einfach geht's</div>
-    <div class="section-title" style="color:#fff">Wie es funktioniert 🥂</div>
-    <div class="section-sub" style="color:rgba(255,255,255,0.85)">In drei Schritten zu deinem perfekten Sommerdrink.</div>
-    <div class="wie-steps">
-      <div class="wie-step">
-        <div class="wie-num">1</div>
-        <div class="wie-step-text">
-          <div class="wie-t">🛍️ Sirup wählen</div>
-          <div class="wie-s">Wähle aus sechs aufregenden Geschmacksrichtungen, die auf <img src="image_0.png" alt="SyrUp Premium Drink Mixers" style="max-height: 14px; width: auto; vertical-align: bottom; margin: 0 3px;"> Premium Drink Mixern basieren, — oder nimm das Starter-Set.</div>
+  <div id="slide-main" class="slide active-slide" style="padding: 0; max-width: 100%;">
+    <header class="hero">
+      <div style="max-width: 900px; margin: 0 auto; width: 100%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+        <div style="flex: 1; min-width: 300px;">
+          <div class="hero-h1">ZERO KALORIEN.<br><span>MAXIMALER AUSGANG.</span></div>
+          <p style="margin-bottom: 24px; font-weight: 700;">Mische deinen eigenen Low-Calorie Drink und behalte deine Form – egal wie hart die Party ist.</p>
+          <button class="cta-btn" style="width: auto; padding: 16px 40px;" onclick="showSlide('slide-shop')">Zum Shop</button>
         </div>
+        <div style="font-size: 100px;">🍹</div>
       </div>
-      <div class="wie-step">
-        <div class="wie-num">2</div>
-        <div class="wie-step-text">
-          <div class="wie-t">💧 Mischen</div>
-          <div class="wie-s">2–3 cl Sirup in ein Glas mit Eis geben. Mit Wasser, Soda oder Tonic auffüllen.</div>
+    </header>
+    <div style="max-width: 900px; margin: 0 auto; padding: 0 24px 40px;">
+        <h2 class="section-title">Unsere Story 🏍️</h2>
+        <p>Gegründet 2026 in St. Gallen. Robin & Nevio hatten im Ausgang genug von zuckerhaltigen Mischgetränken, die das Training ruinieren. Die Lösung: SyrUP.</p>
+    </div>
+  </div>
+
+  <div id="slide-shop" class="slide">
+    <div class="back-link" onclick="showSlide('slide-main')">← Zurück</div>
+    <h2 class="section-title">Wähle deinen Mix 🥭</h2>
+    <div class="card">
+      <h3>Maracuja Zero (Signature Flavor)</h3>
+      <p style="margin-bottom: 15px;">Der perfekte Partner für Wodka-Soda oder Gin.</p>
+      
+      <div style="display: grid; gap: 10px;">
+        <div style="background: #FFF8EF; padding: 15px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center;">
+            <span><strong>1 Liter</strong> (Home Party Edition)</span>
+            <button class="nav-btn" onclick="showSlide('slide-cart')">CHF 14.90 - Add</button>
         </div>
-      </div>
-      <div class="wie-step">
-        <div class="wie-num">3</div>
-        <div class="wie-step-text">
-          <div class="wie-t">🌞 Geniessen</div>
-          <div class="wie-s">Mit Früchten und Minze garnieren. Prosten! Du verdienst diesen Moment.</div>
+        <div style="background: #FFF8EF; padding: 15px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center;">
+            <span><strong>80 ml</strong> (Pocket / Club Edition)</span>
+            <button class="nav-btn" onclick="showSlide('slide-cart')">CHF 4.90 - Add</button>
         </div>
       </div>
     </div>
-  </div>
-
-  <svg width="100%" height="40" viewBox="0 0 680 40" style="display:block;background:#FFF8EF">
-    <path d="M0,0 Q170,40 340,20 Q510,0 680,35 L680,0 Z" fill="#FF9F0A" opacity="0.5"/>
-    <path d="M0,40 Q340,0 680,40 Z" fill="#FFF8EF"/>
-  </svg>
-
-  <div class="section" style="padding-top:8px">
-    <div class="section-label">Trinkinspiration</div>
-    <div class="section-title">Recipes 🍸</div>
-    <div class="section-sub">Von erfrischend bis festlich — für jeden Anlass.</div>
-    <div class="recipes-grid">
-      <div class="recipe-card rc1">
-        <div class="r-tag" style="background:rgba(255,255,255,0.3);color:#fff">⚡ Signature</div>
-        <div class="r-name">Mango Passion Smash</div>
-        <div class="r-kcal">0 kcal · Alkoholfrei</div>
-      </div>
-      <div class="recipe-card rc2">
-        <div class="r-tag" style="background:rgba(255,255,255,0.3);color:#fff">🌿 Fresh</div>
-        <div class="r-name">Minze Mojito Deluxe</div>
-        <div class="r-kcal">0 kcal · Alkoholfrei</div>
-      </div>
-      <div class="recipe-card rc3">
-        <div class="r-tag" style="background:rgba(255,255,255,0.3);color:#fff">✨ Fancy</div>
-        <div class="r-name">Lavendel Spritz</div>
-        <div class="r-kcal">0 kcal · Mit Prosecco</div>
-      </div>
-      <div class="recipe-card rc4">
-        <div class="r-tag" style="background:rgba(255,255,255,0.3);color:#7A5000">☀️ Summer</div>
-        <div class="r-name">Orangen Chili Punch</div>
-        <div class="r-kcal">0 kcal · Für die Party</div>
-      </div>
-    </div>
-    <div style="text-align:center;margin-top:16px">
-      <button class="cta-btn" style="font-size:13px;padding:12px 24px;background:#00C897;box-shadow:0 4px 0 #00906C">Alle Rezepte ansehen →</button>
+    <div class="card" style="opacity: 0.5;">
+        <h3>Zitrone & Waldbeere</h3>
+        <p>Coming soon...</p>
     </div>
   </div>
 
-  <div class="section" style="background:#FFF0A0;margin:0;padding:28px 20px">
-    <div class="section-label">Wer wir sind</div>
-    <div class="section-title" style="color:#1A1A2E">Über uns 🏍️</div>
-    <div class="uber-card">
-      <div class="uber-avatar">
-        <svg width="80" height="80" viewBox="0 0 80 80">
-          <rect width="80" height="80" fill="#FF6B35"/>
-          <rect y="50" width="80" height="30" fill="#1A1A2E"/>
-          <circle cx="40" cy="45" r="18" fill="#FFE066"/>
-          <ellipse cx="20" cy="62" r="8" fill="#1A1A2E" stroke="#FFE066" stroke-width="1.5"/>
-          <ellipse cx="58" cy="62" r="8" fill="#1A1A2E" stroke="#FFE066" stroke-width="1.5"/>
-          <path d="M12,62 L20,50 L50,50 L58,55 L64,62" fill="none" stroke="#FFE066" stroke-width="2" stroke-linecap="round"/>
-          <path d="M28,50 L32,42 L44,42" fill="none" stroke="#FFE066" stroke-width="1.5" stroke-linecap="round"/>
-          <ellipse cx="38" cy="46" rx="5" ry="5" fill="#1A1A2E"/>
-          <ellipse cx="48" cy="45" rx="4" ry="4" fill="#1A1A2E"/>
-          <rect y="60" width="80" height="4" fill="#FF9F0A" opacity="0.4"/>
-        </svg>
+  <div id="slide-cart" class="slide">
+    <div class="back-link" onclick="showSlide('slide-shop')">← Weiter einkaufen</div>
+    <h2 class="section-title">Dein Warenkorb 🛒</h2>
+    <div class="card">
+      <div class="cart-item">
+        <div class="item-meta">
+          <h4>SyrUP Maracuja - 1 Liter</h4>
+          <p>CHF 14.90</p>
+        </div>
+        <div class="item-qty">1x</div>
       </div>
-      <div class="uber-text">
-        <div class="u-name">Lea & Marco, Gründer</div>
-        <div class="u-desc">Zwei Freunde. Eine Motorradtour durch Portugal. Eine verrückte Idee: Was, wenn Sommerdrinks keine Kalorien hätten? Tropical Sip ist aus dieser Reise entstanden.</div>
-        <span class="u-tag">🌊 Gegründet 2023 · Zürich</span>
+      <div class="cart-item">
+        <div class="item-meta">
+          <h4>SyrUP Maracuja - 80 ml</h4>
+          <p>CHF 4.90</p>
+        </div>
+        <div class="item-qty">2x</div>
+      </div>
+      
+      <div style="margin-top: 20px; display: flex; justify-content: space-between; font-size: 20px; font-weight: 900;">
+        <span>Total</span>
+        <span>CHF 24.70</span>
       </div>
     </div>
+    <button class="cta-btn" onclick="showSlide('slide-checkout')">Zur Kasse gehen</button>
   </div>
 
-  <div style="background:linear-gradient(135deg,#C44DFF,#FF4D6D,#FF6B35);padding:32px 24px;text-align:center;position:relative;overflow:hidden">
-    <svg style="position:absolute;top:0;left:0;opacity:0.15" width="200" height="120" viewBox="0 0 200 120">
-      <defs><pattern id="dp" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="3" fill="#fff"/></pattern></defs>
-      <rect width="200" height="120" fill="url(#dp)"/>
-    </svg>
-    <div style="font-size:11px;font-weight:800;color:rgba(255,255,255,0.7);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">Bereit für deinen Sommer?</div>
-    <div style="font-size:26px;font-weight:900;color:#fff;margin-bottom:6px;text-shadow:0 2px 0 rgba(0,0,0,0.15)">Dein Mix wartet! 🍹✨</div>
-    <div style="font-size:12px;color:rgba(255,255,255,0.8);margin-bottom:20px">Kostenloser Versand ab CHF 50 · Lieferung in 2–3 Tagen</div>
-    <button class="cta-btn" style="font-size:15px;padding:14px 36px">🛒 Jetzt probieren</button>
+  <div id="slide-checkout" class="slide">
+    <div class="back-link" onclick="showSlide('slide-cart')">← Zurück zum Warenkorb</div>
+    <h2 class="section-title">Checkout 💳</h2>
+    
+    <div class="card">
+      <h3 style="margin-bottom: 15px;">Lieferadresse</h3>
+      <div class="form-group">
+        <label>Vollständiger Name</label>
+        <input type="text" placeholder="Vorname Nachname">
+      </div>
+      <div class="form-group">
+        <label>Strasse / Nr.</label>
+        <input type="text" placeholder="Musterstrasse 1">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>PLZ</label>
+          <input type="text" placeholder="9000">
+        </div>
+        <div class="form-group">
+          <label>Ort</label>
+          <input type="text" placeholder="St. Gallen">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-bottom: 10px;">Zahlungsmethode</h3>
+      <p style="font-size: 14px; color: #666;">Wähle deine bevorzugte Art zu bezahlen:</p>
+      <div class="payment-icons">
+        <span>📲 💳 🏦</span>
+      </div>
+      <p style="font-size: 12px; margin-top: 10px; font-style: italic;">Twint, Mastercard, Visa, Apple Pay</p>
+    </div>
+
+    <button class="cta-btn" onclick="alert('Bestellung abgeschickt! (Demo)')">Jetzt zahlungspflichtig bestellen</button>
   </div>
 
-  <div class="footer-inner">
-    <div class="footer-logo">Tropical<span>Sip</span> 🌴</div>
-    <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:14px">Handgemachte Zero-Calorie Sirups aus Zürich</div>
-    <div class="footer-badges">
-      <div class="f-badge">🇨🇭 Swiss Made</div>
-      <div class="f-badge">🌿 Vegan</div>
-      <div class="f-badge">⚡ 0 kcal</div>
-      <div class="f-badge">💧 Glutenfrei</div>
-    </div>
-    <div class="footer-links">
-      <a href="#">Datenschutz</a>
-      <a href="#">AGB</a>
-      <a href="#">Impressum</a>
-      <a href="#">Kontakt</a>
-      <a href="#">Instagram</a>
-    </div>
-    <div class="footer-copy">© 2025 Tropical Sip GmbH · Zürich, Schweiz · Alle Rechte vorbehalten</div>
-  </div>
+  <footer>
+    <div style="font-weight: 900; font-size: 20px; margin-bottom: 10px;">SyrUP SG</div>
+    <p style="font-size: 12px; opacity: 0.6;">© 2026 Robin & Nevio - St. Gallen, Schweiz</p>
+  </footer>
 
 </div>
+
+<script>
+  function showSlide(slideId) {
+    // Alle Slides verstecken
+    const slides = document.querySelectorAll('.slide');
+    slides.forEach(s => s.classList.remove('active-slide'));
+    
+    // Gewünschten Slide zeigen
+    document.getElementById(slideId).classList.add('active-slide');
+    
+    // Nach oben scrollen
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
