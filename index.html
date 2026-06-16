@@ -1,31 +1,14 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SyrUP - Premium Drink Mixers</title>
+<title>SyrUP - Feiern ohne Formverlust</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap');
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: #FFF8EF; color: #1A1A2E; font-family: 'Nunito', sans-serif; }
-  .ts-page { min-height: 100vh; display: flex; flex-direction: column; }
-
-  /* LOGO BACKGROUND REMOVAL TRICK */
-  .logo-img {
-    height: 50px;
-    width: auto;
-    /* Entfernt schwarz, lässt Farben leuchten */
-    mix-blend-mode: screen; 
-    display: block;
-  }
-  .nav-logo-container {
-    background: #000; /* Schwarzer Hintergrund im Container hilft dem Blend-Effekt */
-    padding: 5px 15px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-  }
+  .ts-page { font-family: 'Nunito', sans-serif; background: #FFF8EF; overflow-x: hidden; min-height: 100vh;}
 
   /* NAV */
   .nav {
@@ -33,63 +16,118 @@
     padding: 12px 20px; background: #fff; border-bottom: 2px solid #FFF0A0;
     position: sticky; top: 0; z-index: 100;
   }
-  .nav-btn {
-    background: #FF4D6D; color: #fff; font-size: 14px; font-weight: 900;
-    border: none; border-radius: 20px; padding: 10px 20px; cursor: pointer;
-  }
-
-  /* SLIDES */
-  .slide { display: none; padding: 40px 24px; max-width: 900px; margin: 0 auto; width: 100%; flex: 1; }
-  .active-slide { display: block; }
+  .nav-logo { font-size: 22px; font-weight: 900; color: #FF6B35; cursor: pointer; letter-spacing: -0.5px;}
+  .nav-logo span { color: #00C897; text-transform: uppercase; }
+  .nav-actions { display: flex; gap: 10px; }
 
   /* HERO */
   .hero {
     background: linear-gradient(135deg, #FF6B35 0%, #FFB800 40%, #FF4D6D 80%, #C44DFF 100%);
-    position: relative; overflow: hidden; padding: 60px 32px;
-    min-height: 400px; display: flex; align-items: center; border-radius: 0 0 40px 40px;
-    margin-bottom: 40px; color: #fff;
+    position: relative; overflow: hidden; padding: 0;
+    min-height: 520px; display: flex; align-items: stretch;
   }
-  .hero-h1 { font-size: 42px; font-weight: 900; line-height: 1.1; margin-bottom: 16px; }
+  .hero-wave-top {
+    position: absolute; top: 0; left: 0; right: 0; height: 8px;
+    background: repeating-linear-gradient(90deg, #FFE066 0 40px, #FF6B9D 40px 80px, #00D4AA 80px 120px, #FFB800 120px 160px);
+  }
+  .hero-wave-bottom { position: absolute; bottom: 0; left: 0; right: 0; overflow: hidden; line-height: 0; }
+  .hero-wave-bottom svg { display: block; width: 100%; height: 60px; }
+  .hero-inner { display: flex; align-items: center; padding: 40px 32px 80px 32px; gap: 0; width: 100%; position: relative; z-index: 2; flex-wrap: wrap;}
+  .hero-text { flex: 1; min-width: 250px;}
+  .hero-badge {
+    display: inline-block; background: #FFE066; color: #C44DFF; font-size: 11px;
+    font-weight: 800; border-radius: 20px; padding: 4px 14px; letter-spacing: 1.5px;
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+  .hero-h1 {
+    color: #fff; font-size: 36px; font-weight: 900; line-height: 1.1;
+    text-shadow: 0 3px 0 rgba(0,0,0,0.15); margin-bottom: 16px; letter-spacing: -0.5px;
+  }
   .hero-h1 span { color: #FFE066; }
-
-  /* CARDS & FORMS */
-  .card {
-    background: #fff; border-radius: 24px; padding: 24px; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 24px;
+  .hero-sub {
+    color: rgba(255,255,255,0.92); font-size: 14px; font-weight: 700;
+    line-height: 1.6; margin-bottom: 28px; max-width: 340px;
   }
-  .section-title { font-size: 28px; font-weight: 900; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;}
-  
   .cta-btn {
-    display: block; width: 100%; background: #FF4D6D; color: #FFE066; 
-    font-size: 18px; font-weight: 900; border-radius: 50px; padding: 16px;
-    border: none; cursor: pointer; text-transform: uppercase; text-align: center;
-    box-shadow: 0 4px 0 #C4003B; transition: 0.1s; text-decoration: none;
+    display: inline-block; background: #FF4D6D; color: #FFE066; font-family: 'Nunito', sans-serif;
+    font-size: 16px; font-weight: 900; border-radius: 50px; padding: 14px 32px;
+    border: none; cursor: pointer; letter-spacing: 0.5px; text-transform: uppercase;
+    box-shadow: 0 4px 0 #C4003B; transition: transform 0.1s, box-shadow 0.1s; text-align: center;
   }
   .cta-btn:hover { transform: translateY(2px); box-shadow: 0 2px 0 #C4003B; }
+  .btn-outline { background: transparent; border: 2px solid #FF4D6D; color: #FF4D6D; box-shadow: none; }
+  .btn-outline:hover { background: #FF4D6D; color: #FFE066; box-shadow: 0 2px 0 #C4003B; }
 
-  /* WARENKORB ITEMS */
-  .cart-item {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 15px 0; border-bottom: 1px solid #eee;
+  /* BOTTLE + GLASS illustration */
+  .hero-visual { width: 240px; flex-shrink: 0; display: flex; justify-content: center; align-items: flex-end; padding-bottom: 10px; font-size: 120px;}
+
+  /* SECTION STYLES */
+  .section { padding: 40px 24px 32px; max-width: 800px; margin: 0 auto;}
+  .section-label {
+    text-align: center; font-size: 11px; font-weight: 800; letter-spacing: 2px;
+    text-transform: uppercase; color: #FF6B35; margin-bottom: 6px;
   }
-  .cart-item:last-child { border-bottom: none; }
-  .item-meta h4 { font-weight: 900; font-size: 16px; }
-  .item-qty { background: #eee; padding: 5px 12px; border-radius: 10px; font-weight: 800; }
-
-  /* FORM STYLES */
-  .form-group { margin-bottom: 15px; }
-  .form-group label { display: block; font-size: 13px; font-weight: 800; margin-bottom: 5px; color: #FF6B35; }
-  .form-group input {
-    width: 100%; padding: 12px; border: 2px solid #FFF0A0; border-radius: 12px;
-    font-family: 'Nunito', sans-serif; font-size: 15px; outline: none;
+  .section-title {
+    text-align: center; font-size: 26px; font-weight: 900; color: #1A1A2E;
+    margin-bottom: 8px; letter-spacing: -0.5px;
   }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+  .section-sub { text-align: center; font-size: 13px; color: #666; margin-bottom: 28px; line-height: 1.6; }
 
-  .payment-icons { display: flex; gap: 10px; margin-top: 10px; font-size: 24px; }
+  /* SORTEN grid */
+  .sorten-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px; }
+  .sorten-card { border-radius: 20px; padding: 18px 12px 14px; text-align: center; position: relative; overflow: hidden; }
+  .sorten-card .s-icon { font-size: 36px; margin-bottom: 8px; display: block; }
+  .sorten-card .s-name { font-size: 13px; font-weight: 900; margin-bottom: 4px; }
+  .sorten-card .s-note { font-size: 10px; font-weight: 700; opacity: 0.75; }
+  .sorten-card .s-zero { position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,0.5); border-radius: 10px; font-size: 9px; font-weight: 800; padding: 2px 6px; color: rgba(0,0,0,0.6); }
+  .sc1 { background: #FFF0A0; border: 2px solid #FFB800;} .sc1 .s-name { color: #A06000; }
+  .sc-coming { background: #E0E0E0; opacity: 0.7;} .sc-coming .s-name { color: #555; }
 
-  .back-link { cursor: pointer; color: #FF6B35; font-weight: 800; display: inline-block; margin-bottom: 15px; }
+  /* WIE ES FUNKTIONIERT */
+  .wie-bg { background: linear-gradient(160deg, #FFB800 0%, #FF6B35 100%); }
+  .wie-steps { display: flex; flex-direction: column; gap: 14px; }
+  .wie-step { background: rgba(255,255,255,0.22); border-radius: 16px; padding: 14px 16px; display: flex; align-items: center; gap: 14px; }
+  .wie-num { width: 36px; height: 36px; border-radius: 50%; background: #fff; color: #FF6B35; font-size: 18px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .wie-step-text .wie-t { font-size: 14px; font-weight: 900; color: #fff; }
+  .wie-step-text .wie-s { font-size: 11px; color: rgba(255,255,255,0.85); margin-top: 2px; }
 
-  footer { background: #1A1A2E; color: #fff; padding: 40px 24px; text-align: center; margin-top: auto; }
+  /* ÜBER UNS */
+  .uber-card { background: #1A1A2E; border-radius: 24px; padding: 28px 20px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .uber-avatar { width: 80px; height: 80px; border-radius: 50%; flex-shrink: 0; border: 3px solid #FFE066; display: flex; justify-content: center; align-items: center; background: #333; font-size: 30px; }
+  .uber-text .u-name { font-size: 16px; font-weight: 900; color: #FFE066; margin-bottom: 4px; }
+  .uber-text .u-desc { font-size: 12px; color: rgba(255,255,255,0.75); line-height: 1.6; }
+  .uber-text .u-tag { display: inline-block; margin-top: 8px; background: #FF4D6D; color: #fff; font-size: 9px; font-weight: 800; border-radius: 10px; padding: 3px 10px; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* CARDS FÜR SHOP, CART, CHECKOUT */
+  .slide-container { display: none; padding: 40px 24px; max-width: 800px; margin: 0 auto; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  
+  .back-btn { background: #1A1A2E; color: #fff; padding: 8px 16px; border-radius: 20px; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; border: none; font-family: 'Nunito', sans-serif; margin-bottom: 20px; font-size: 14px; }
+  .product-detail-card { background: #fff; border-radius: 20px; padding: 24px; margin-bottom: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+  .product-detail-card h2 { color: #FF6B35; margin-bottom: 10px; font-weight: 900;}
+  .product-detail-card p { color: #555; font-size: 14px; line-height: 1.6; margin-bottom: 20px;}
+  
+  .size-option { border: 2px solid #FFE066; border-radius: 16px; padding: 16px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; background: #FFF8EF; transition: 0.2s; }
+  .size-option:hover { border-color: #FF6B35; background: #fff; }
+  .size-info h3 { font-size: 16px; font-weight: 900; color: #1A1A2E; margin-bottom: 4px;}
+  .size-info p { font-size: 12px; color: #666;}
+  .size-price { font-size: 18px; font-weight: 900; color: #FF4D6D; }
+
+  /* WARENKORB ROW */
+  .cart-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #eee; }
+  .cart-row:last-child { border-bottom: none; }
+  .cart-item-title { font-weight: 900; color: #1A1A2E; font-size: 16px; margin-bottom: 4px;}
+  .cart-item-price { color: #FF4D6D; font-weight: 800; }
+  
+  /* FORM INPUTS */
+  .form-input { width: 100%; padding: 14px; border: 2px solid #FFF0A0; border-radius: 12px; font-family: 'Nunito', sans-serif; font-size: 15px; outline: none; margin-bottom: 14px; transition: 0.2s; background: #FFF8EF; }
+  .form-input:focus { border-color: #FF6B35; background: #fff; }
+
+  /* FOOTER */
+  .footer-inner { background: #1A1A2E; padding: 24px; text-align: center; margin-top: 40px; }
+  .footer-logo { font-size: 22px; font-weight: 900; color: #FF6B35; margin-bottom: 6px; }
+  .footer-logo span { color: #00C897; text-transform: uppercase;}
+  .footer-copy { font-size: 10px; color: rgba(255,255,255,0.35); }
 </style>
 </head>
 <body>
@@ -97,135 +135,207 @@
 <div class="ts-page">
 
   <nav class="nav">
-    <div class="nav-logo-container" onclick="showSlide('slide-main')">
-       <img src="https://files.oaiusercontent.com/file-K77G0L7yR36BqU9M7yX28p6m?se=2024-10-24T12%3A05%3A22Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D30743f5f-923f-4277-8321-3958742d4a66.webp&sig=6Y7Y7uI4S8iL7Yv9oE4H5vO5%2By0v0U4W4O0B7Q9i1A0%3D" alt="SyrUP Logo" class="logo-img">
+    <div class="nav-logo" onclick="showSlide('slide-main')">Syr<span>UP</span></div>
+    <div class="nav-actions">
+      <button class="cta-btn btn-outline" style="padding: 8px 16px; font-size: 12px; box-shadow: none;" onclick="showSlide('slide-shop')">Shop</button>
+      <button class="cta-btn" style="padding: 8px 16px; font-size: 12px;" onclick="showSlide('slide-cart')">🛒 Cart</button>
     </div>
-    <button class="nav-btn" onclick="showSlide('slide-cart')">🛒 Warenkorb</button>
   </nav>
 
-  <div id="slide-main" class="slide active-slide" style="padding: 0; max-width: 100%;">
+  <div id="slide-main" class="slide-container" style="display: block; padding: 0; max-width: 100%;">
     <header class="hero">
-      <div style="max-width: 900px; margin: 0 auto; width: 100%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
-        <div style="flex: 1; min-width: 300px;">
-          <div class="hero-h1">ZERO KALORIEN.<br><span>MAXIMALER AUSGANG.</span></div>
-          <p style="margin-bottom: 24px; font-weight: 700;">Mische deinen eigenen Low-Calorie Drink und behalte deine Form – egal wie hart die Party ist.</p>
-          <button class="cta-btn" style="width: auto; padding: 16px 40px;" onclick="showSlide('slide-shop')">Zum Shop</button>
+      <div class="hero-wave-top"></div>
+      <div class="hero-inner">
+        <div class="hero-text">
+          <div class="hero-badge">Lifestyle & Fitness</div>
+          <h1 class="hero-h1">Zero Kalorien.<br><span>100% Party.</span></h1>
+          <p class="hero-sub">Halte deine Form, auch wenn du im Sommer in den Ausgang gehst. Der erste Zero-Kalorien Sirup speziell zum Mischen mit Alkohol für Low-Calorie Drinks.</p>
+          <button class="cta-btn" onclick="showSlide('slide-shop')">Jetzt Einkaufen & Entdecken</button>
         </div>
-        <div style="font-size: 100px;">🍹</div>
+        <div class="hero-visual">🍹</div>
+      </div>
+      <div class="hero-wave-bottom">
+        <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+          <path d="M0,60 C320,0 420,0 720,30 C1020,60 1120,60 1440,0 L1440,60 L0,60 Z" fill="#FFF8EF"></path>
+        </svg>
       </div>
     </header>
-    <div style="max-width: 900px; margin: 0 auto; padding: 0 24px 40px;">
-        <h2 class="section-title">Unsere Story 🏍️</h2>
-        <p>Gegründet 2026 in St. Gallen. Robin & Nevio hatten im Ausgang genug von zuckerhaltigen Mischgetränken, die das Training ruinieren. Die Lösung: SyrUP.</p>
-    </div>
+
+    <section class="section">
+      <div class="section-label">Unsere Flavors</div>
+      <h2 class="section-title">Dein Geschmack</h2>
+      <p class="section-sub">Aktuell starten wir mit unserem Signature-Flavor. Weitere Sorten sind bereits in Planung!</p>
+      <div class="sorten-grid">
+        <div class="sorten-card sc1">
+          <span class="s-icon">🥭</span>
+          <div class="s-name">Maracuja</div>
+          <div class="s-note">Der Bestseller</div>
+          <div class="s-zero">0 KCAL</div>
+        </div>
+        <div class="sorten-card sc-coming">
+          <span class="s-icon">🍓</span>
+          <div class="s-name">Waldbeere</div>
+          <div class="s-note">Coming up</div>
+        </div>
+        <div class="sorten-card sc-coming">
+          <span class="s-icon">🍋</span>
+          <div class="s-name">Zitrone Ice</div>
+          <div class="s-note">Coming up</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section wie-bg" style="border-radius: 30px; color: white;">
+      <div class="section-label" style="color: #FFE066;">Das Prinzip</div>
+      <h2 class="section-title" style="color: #fff;">Wie es funktioniert</h2>
+      <p class="section-sub" style="color: rgba(255,255,255,0.8);">Mache aus jedem Drink einen kalorienarmen Genuss.</p>
+      <div class="wie-steps">
+        <div class="wie-step">
+          <div class="wie-num">1</div>
+          <div class="wie-step-text">
+            <div class="wie-t">Alkohol & Wasser wählen</div>
+            <div class="wie-s">Wodka, Gin oder weisser Rum mit Sprudelwasser.</div>
+          </div>
+        </div>
+        <div class="wie-step">
+          <div class="wie-num">2</div>
+          <div class="wie-step-text">
+            <div class="wie-t">SyrUP dazugeben</div>
+            <div class="wie-s">Ein Spritzer von unserem Maracuja-Sirup reicht völlig aus.</div>
+          </div>
+        </div>
+        <div class="wie-step">
+          <div class="wie-num">3</div>
+          <div class="wie-step-text">
+            <div class="wie-t">Gains sichern & Feiern</div>
+            <div class="wie-s">Keine unnötigen Zucker-Kalorien durch Süssgetränke. Perfekt für die Shred-Season.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-label">Hinter den Kulissen</div>
+      <h2 class="section-title">Wer wir sind</h2>
+      <div class="uber-card">
+        <div class="uber-avatar">🤝</div>
+        <div class="uber-text">
+          <div class="u-name">Robin & Nevio</div>
+          <div class="u-desc">Die Idee entstand bei uns im Ausgang: Wir wollten feiern, aber unsere Fitness-Ziele und die Form nicht durch zuckerhaltige Mischgetränke ruinieren. So wurde 2026 in St. Gallen (SG) unsere Firma gegründet. SyrUP ist für alle, die Disziplin im Gym und Spass am Wochenende kombinieren wollen.</div>
+          <div class="u-tag">Gründer aus SG</div>
+        </div>
+      </div>
+    </section>
   </div>
 
-  <div id="slide-shop" class="slide">
-    <div class="back-link" onclick="showSlide('slide-main')">← Zurück</div>
-    <h2 class="section-title">Wähle deinen Mix 🥭</h2>
-    <div class="card">
-      <h3>Maracuja Zero (Signature Flavor)</h3>
-      <p style="margin-bottom: 15px;">Der perfekte Partner für Wodka-Soda oder Gin.</p>
+  <div id="slide-shop" class="slide-container">
+    <button class="back-btn" onclick="showSlide('slide-main')">← Zurück zur Startseite</button>
+
+    <div class="product-detail-card">
+      <h2>SyrUP - Maracuja 🥭</h2>
+      <p>Unser erster und beliebtester Sirup. Tropischer Maracuja-Geschmack, der perfekt zu Wodka oder Gin mit Wasser passt. 100% Geschmack, 0 Kalorien im Sirup.</p>
       
-      <div style="display: grid; gap: 10px;">
-        <div style="background: #FFF8EF; padding: 15px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center;">
-            <span><strong>1 Liter</strong> (Home Party Edition)</span>
-            <button class="nav-btn" onclick="showSlide('slide-cart')">CHF 14.90 - Add</button>
+      <h3 style="margin-bottom: 12px; color: #1A1A2E;">Wähle deine Grösse:</h3>
+      
+      <div class="size-option">
+        <div class="size-info">
+          <h3>Die 1L Flasche</h3>
+          <p>Perfekt für die Homeparty oder das Vortrinken zuhause.</p>
         </div>
-        <div style="background: #FFF8EF; padding: 15px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center;">
-            <span><strong>80 ml</strong> (Pocket / Club Edition)</span>
-            <button class="nav-btn" onclick="showSlide('slide-cart')">CHF 4.90 - Add</button>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <div class="size-price">CHF 14.90</div>
+            <button class="cta-btn" style="padding: 8px 16px; font-size: 12px;" onclick="showSlide('slide-cart')">Hinzufügen</button>
         </div>
-      </div>
-    </div>
-    <div class="card" style="opacity: 0.5;">
-        <h3>Zitrone & Waldbeere</h3>
-        <p>Coming soon...</p>
-    </div>
-  </div>
-
-  <div id="slide-cart" class="slide">
-    <div class="back-link" onclick="showSlide('slide-shop')">← Weiter einkaufen</div>
-    <h2 class="section-title">Dein Warenkorb 🛒</h2>
-    <div class="card">
-      <div class="cart-item">
-        <div class="item-meta">
-          <h4>SyrUP Maracuja - 1 Liter</h4>
-          <p>CHF 14.90</p>
-        </div>
-        <div class="item-qty">1x</div>
-      </div>
-      <div class="cart-item">
-        <div class="item-meta">
-          <h4>SyrUP Maracuja - 80 ml</h4>
-          <p>CHF 4.90</p>
-        </div>
-        <div class="item-qty">2x</div>
       </div>
       
-      <div style="margin-top: 20px; display: flex; justify-content: space-between; font-size: 20px; font-weight: 900;">
-        <span>Total</span>
-        <span>CHF 24.70</span>
-      </div>
-    </div>
-    <button class="cta-btn" onclick="showSlide('slide-checkout')">Zur Kasse gehen</button>
-  </div>
-
-  <div id="slide-checkout" class="slide">
-    <div class="back-link" onclick="showSlide('slide-cart')">← Zurück zum Warenkorb</div>
-    <h2 class="section-title">Checkout 💳</h2>
-    
-    <div class="card">
-      <h3 style="margin-bottom: 15px;">Lieferadresse</h3>
-      <div class="form-group">
-        <label>Vollständiger Name</label>
-        <input type="text" placeholder="Vorname Nachname">
-      </div>
-      <div class="form-group">
-        <label>Strasse / Nr.</label>
-        <input type="text" placeholder="Musterstrasse 1">
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>PLZ</label>
-          <input type="text" placeholder="9000">
+      <div class="size-option">
+        <div class="size-info">
+          <h3>Das 80ml Fläschchen</h3>
+          <p>Das kleine Format zum Mitnehmen. Passt in jede Tasche für den Ausgang.</p>
         </div>
-        <div class="form-group">
-          <label>Ort</label>
-          <input type="text" placeholder="St. Gallen">
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <div class="size-price">CHF 4.90</div>
+            <button class="cta-btn" style="padding: 8px 16px; font-size: 12px;" onclick="showSlide('slide-cart')">Hinzufügen</button>
         </div>
       </div>
     </div>
-
-    <div class="card">
-      <h3 style="margin-bottom: 10px;">Zahlungsmethode</h3>
-      <p style="font-size: 14px; color: #666;">Wähle deine bevorzugte Art zu bezahlen:</p>
-      <div class="payment-icons">
-        <span>📲 💳 🏦</span>
-      </div>
-      <p style="font-size: 12px; margin-top: 10px; font-style: italic;">Twint, Mastercard, Visa, Apple Pay</p>
-    </div>
-
-    <button class="cta-btn" onclick="alert('Bestellung abgeschickt! (Demo)')">Jetzt zahlungspflichtig bestellen</button>
   </div>
 
-  <footer>
-    <div style="font-weight: 900; font-size: 20px; margin-bottom: 10px;">SyrUP SG</div>
-    <p style="font-size: 12px; opacity: 0.6;">© 2026 Robin & Nevio - St. Gallen, Schweiz</p>
+  <div id="slide-cart" class="slide-container">
+    <button class="back-btn" onclick="showSlide('slide-shop')">← Weiter einkaufen</button>
+
+    <div class="product-detail-card">
+      <h2 style="margin-bottom: 20px;">Dein Warenkorb 🛒</h2>
+      
+      <div class="cart-row">
+        <div>
+            <div class="cart-item-title">SyrUP Maracuja - 1 Liter</div>
+            <div style="font-size: 12px; color: #666;">Menge: 1</div>
+        </div>
+        <div class="cart-item-price">CHF 14.90</div>
+      </div>
+
+      <div class="cart-row">
+        <div>
+            <div class="cart-item-title">SyrUP Maracuja - 80 ml</div>
+            <div style="font-size: 12px; color: #666;">Menge: 2</div>
+        </div>
+        <div class="cart-item-price">CHF 9.80</div>
+      </div>
+
+      <div class="cart-row" style="border-top: 2px solid #FFE066; margin-top: 10px; padding-top: 20px;">
+        <div style="font-weight: 900; font-size: 18px; color: #1A1A2E;">Total</div>
+        <div style="font-weight: 900; font-size: 22px; color: #FF4D6D;">CHF 24.70</div>
+      </div>
+
+      <button class="cta-btn" style="width: 100%; margin-top: 24px;" onclick="showSlide('slide-checkout')">Zur Kasse gehen</button>
+    </div>
+  </div>
+
+  <div id="slide-checkout" class="slide-container">
+    <button class="back-btn" onclick="showSlide('slide-cart')">← Zurück zum Warenkorb</button>
+
+    <div class="product-detail-card">
+      <h2 style="margin-bottom: 20px;">Checkout 💳</h2>
+      
+      <h3 style="font-size: 14px; color: #FF6B35; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">Lieferadresse</h3>
+      <input type="text" class="form-input" placeholder="Vorname Nachname">
+      <input type="text" class="form-input" placeholder="Strasse und Hausnummer">
+      <div style="display: flex; gap: 14px;">
+        <input type="text" class="form-input" placeholder="PLZ" style="width: 30%;">
+        <input type="text" class="form-input" placeholder="Ort" style="width: 70%;">
+      </div>
+
+      <h3 style="font-size: 14px; color: #FF6B35; margin-bottom: 10px; margin-top: 20px; text-transform: uppercase; letter-spacing: 1px;">Zahlungsmethode</h3>
+      <div style="display: flex; gap: 10px; margin-bottom: 24px; font-size: 28px;">
+        <span style="cursor: pointer; opacity: 0.6; transition: 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">📱</span>
+        <span style="cursor: pointer; opacity: 0.6; transition: 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">💳</span>
+        <span style="cursor: pointer; opacity: 0.6; transition: 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">🏦</span>
+      </div>
+
+      <button class="cta-btn" style="width: 100%;" onclick="alert('Bestellung bei SyrUP erfolgreich abgeschlossen! (Demo)')">Jetzt kaufen (CHF 24.70)</button>
+    </div>
+  </div>
+
+  <footer class="footer-inner">
+    <div class="footer-logo">Syr<span>UP</span></div>
+    <div class="footer-copy">© 2026 Robin & Nevio - Gegründet in St. Gallen (SG)</div>
   </footer>
 
 </div>
 
 <script>
   function showSlide(slideId) {
-    // Alle Slides verstecken
-    const slides = document.querySelectorAll('.slide');
-    slides.forEach(s => s.classList.remove('active-slide'));
+    // Verstecke alle Container
+    const slides = document.querySelectorAll('.slide-container');
+    slides.forEach(slide => {
+      slide.style.display = 'none';
+    });
     
-    // Gewünschten Slide zeigen
-    document.getElementById(slideId).classList.add('active-slide');
+    // Zeige nur den ausgewählten Container
+    document.getElementById(slideId).style.display = 'block';
     
-    // Nach oben scrollen
+    // Scrolle flüssig nach oben
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 </script>
