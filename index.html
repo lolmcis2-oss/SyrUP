@@ -34,14 +34,11 @@
     color: rgba(255,255,255,0.92); font-size: 14px; font-weight: 700;
     line-height: 1.6; margin-bottom: 28px; max-width: 340px;
   }
-  
-  /* ANGEPASST: Button-Klassen für <a>-Tags optimiert */
   .cta-btn {
     display: inline-block; background: #FF4D6D; color: #FFE066; font-family: 'Nunito', sans-serif;
     font-size: 16px; font-weight: 900; border-radius: 50px; padding: 14px 32px;
     border: none; cursor: pointer; letter-spacing: 0.5px; text-transform: uppercase;
     box-shadow: 0 4px 0 #C4003B; transition: transform 0.1s, box-shadow 0.1s;
-    text-decoration: none; text-align: center;
   }
   .cta-btn:hover { transform: translateY(2px); box-shadow: 0 2px 0 #C4003B; }
 
@@ -164,13 +161,10 @@
   .nav-logo span { color: #00C897; }
   .nav-links { display: flex; gap: 12px; }
   .nav-links a { font-size: 11px; font-weight: 800; color: #1A1A2E; text-decoration: none; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.5px; }
-  
-  /* ANGEPASST: Button-Klassen für <a>-Tags optimiert */
   .nav-btn {
-    display: inline-block; background: #FF4D6D; color: #fff; font-family: 'Nunito', sans-serif;
+    background: #FF4D6D; color: #fff; font-family: 'Nunito', sans-serif;
     font-size: 10px; font-weight: 900; border: none; border-radius: 20px;
     padding: 7px 14px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px;
-    text-decoration: none; text-align: center;
   }
 
   /* TRUST BAR */
@@ -194,11 +188,11 @@
   <nav class="nav">
     <div class="nav-logo">Tropical<span>Sip</span> 🍹</div>
     <div class="nav-links">
-      <a href="#sorten">Sorten</a>
-      <a href="#rezepte">Recipes</a>
-      <a href="#about">Über uns</a>
+      <a href="#">Sorten</a>
+      <a href="#">Recipes</a>
+      <a href="#">Über uns</a>
     </div>
-    <a href="#bestellen" class="nav-btn">Bestellen</a>
+    <button class="nav-btn">Bestellen</button>
   </nav>
 
   <div class="hero">
@@ -226,7 +220,7 @@
         <div class="hero-badge">🌴 Zero Zucker · 100% Sommer</div>
         <div class="hero-h1">ERFRISCHUNG<br>OHNE REUE.<br><span>DEIN SOMMER.<br>DEIN MIX.</span></div>
         <div class="hero-sub">Entdecke unsere handgemachten Zero-Calorie Sirups aus der Schweiz. Null Zucker, 100% Spaß.</div>
-        <a href="#bestellen" class="cta-btn">🛒 Jetzt bestellen</a>
+        <button class="cta-btn">🛒 Jetzt bestellen</button>
       </div>
 
       <div class="hero-visual">
@@ -293,7 +287,7 @@
     <div class="trust-item">⚡ Natürliche Aromen</div>
   </div>
 
-  <div id="sorten" class="section">
+  <div class="section">
     <div class="section-label">Was wir bieten</div>
     <div class="section-title">Unsere Sorten 🍹</div>
     <div class="section-sub">Sechs handgemachte Geschmacksrichtungen — alle ohne Zucker und Kalorien.</div>
@@ -352,7 +346,7 @@
         <div class="wie-num">1</div>
         <div class="wie-step-text">
           <div class="wie-t">🛍️ Sirup wählen</div>
-          <div class="wie-s">Wähle aus sechs aufregenden Geschmacksrichtungen — oder nimm das Starter-Set.</div>
+          <div class="wie-s">Wähle aus sechs aufregenden Geschmacksrichtungen, die auf <img src="image_0.png" alt="SyrUp Premium Drink Mixers" style="max-height: 14px; width: auto; vertical-align: bottom; margin: 0 3px;"> Premium Drink Mixern basieren, — oder nimm das Starter-Set.</div>
         </div>
       </div>
       <div class="wie-step">
@@ -377,7 +371,7 @@
     <path d="M0,40 Q340,0 680,40 Z" fill="#FFF8EF"/>
   </svg>
 
-  <div id="rezepte" class="section" style="padding-top:8px">
+  <div class="section" style="padding-top:8px">
     <div class="section-label">Trinkinspiration</div>
     <div class="section-title">Recipes 🍸</div>
     <div class="section-sub">Von erfrischend bis festlich — für jeden Anlass.</div>
@@ -404,11 +398,11 @@
       </div>
     </div>
     <div style="text-align:center;margin-top:16px">
-      <a href="#rezepte" class="cta-btn" style="font-size:13px;padding:12px 24px;background:#00C897;box-shadow:0 4px 0 #00906C;">Alle Rezepte ansehen →</a>
+      <button class="cta-btn" style="font-size:13px;padding:12px 24px;background:#00C897;box-shadow:0 4px 0 #00906C">Alle Rezepte ansehen →</button>
     </div>
   </div>
 
-  <div id="about" class="section" style="background:#FFF0A0;margin:0;padding:28px 20px">
+  <div class="section" style="background:#FFF0A0;margin:0;padding:28px 20px">
     <div class="section-label">Wer wir sind</div>
     <div class="section-title" style="color:#1A1A2E">Über uns 🏍️</div>
     <div class="uber-card">
@@ -427,14 +421,14 @@
         </svg>
       </div>
       <div class="uber-text">
-        <div class="u-name">Robin & [Name des Kollegen], Gründer</div>
-        <div class="u-desc">Zwei Freunde. Eine Motorradtour nach Cascais, Portugal. Eine verrückte Idee: Was, wenn geile Sommerdrinks beim Feiern absolut keine Kalorien hätten? Tropical Sip ist aus genau dieser Reise entstanden.</div>
-        <span class="u-tag">🌊 Gegründet 2026 · St. Gallen</span>
+        <div class="u-name">Lea & Marco, Gründer</div>
+        <div class="u-desc">Zwei Freunde. Eine Motorradtour durch Portugal. Eine verrückte Idee: Was, wenn Sommerdrinks keine Kalorien hätten? Tropical Sip ist aus dieser Reise entstanden.</div>
+        <span class="u-tag">🌊 Gegründet 2023 · Zürich</span>
       </div>
     </div>
   </div>
 
-  <div id="bestellen" style="background:linear-gradient(135deg,#C44DFF,#FF4D6D,#FF6B35);padding:32px 24px;text-align:center;position:relative;overflow:hidden">
+  <div style="background:linear-gradient(135deg,#C44DFF,#FF4D6D,#FF6B35);padding:32px 24px;text-align:center;position:relative;overflow:hidden">
     <svg style="position:absolute;top:0;left:0;opacity:0.15" width="200" height="120" viewBox="0 0 200 120">
       <defs><pattern id="dp" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="3" fill="#fff"/></pattern></defs>
       <rect width="200" height="120" fill="url(#dp)"/>
@@ -442,12 +436,12 @@
     <div style="font-size:11px;font-weight:800;color:rgba(255,255,255,0.7);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">Bereit für deinen Sommer?</div>
     <div style="font-size:26px;font-weight:900;color:#fff;margin-bottom:6px;text-shadow:0 2px 0 rgba(0,0,0,0.15)">Dein Mix wartet! 🍹✨</div>
     <div style="font-size:12px;color:rgba(255,255,255,0.8);margin-bottom:20px">Kostenloser Versand ab CHF 50 · Lieferung in 2–3 Tagen</div>
-    <a href="#bestellen" class="cta-btn" style="font-size:15px;padding:14px 36px;">🛒 Jetzt probieren</a>
+    <button class="cta-btn" style="font-size:15px;padding:14px 36px">🛒 Jetzt probieren</button>
   </div>
 
   <div class="footer-inner">
     <div class="footer-logo">Tropical<span>Sip</span> 🌴</div>
-    <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:14px">Handgemachte Zero-Calorie Sirups aus St. Gallen</div>
+    <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:14px">Handgemachte Zero-Calorie Sirups aus Zürich</div>
     <div class="footer-badges">
       <div class="f-badge">🇨🇭 Swiss Made</div>
       <div class="f-badge">🌿 Vegan</div>
@@ -461,7 +455,7 @@
       <a href="#">Kontakt</a>
       <a href="#">Instagram</a>
     </div>
-    <div class="footer-copy">© 2026 Tropical Sip GmbH · St. Gallen, Schweiz · Alle Rechte vorbehalten</div>
+    <div class="footer-copy">© 2025 Tropical Sip GmbH · Zürich, Schweiz · Alle Rechte vorbehalten</div>
   </div>
 
 </div>
